@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investigation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color : rgb(71, 34, 12);
+            font-family: Arial, sans-serif;
+        }
+
+        #phone {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 540px;
+            background: url('iphone.jpg') center/cover no-repeat;
+            border: 10px solid #000000;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        #apps {
+            position: absolute;
+            top: 55%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .app {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            cursor: pointer;
+            text-align: center;
+            color: white;
+        }
+
+        .app img {
+            width: 70%;
+            height: 70%;
+            border-radius: 10px;
+        }
+
+        .app span {
+            display: block;
+            margin-top: 5px;
+            font-size: 12px;
+        }
+
+        /* Styles for the app interfaces */
+        .app-interface {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 260px;
+            height: 84%;
+            max-height: 540px;
+            background-color: #3033e4;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Ajoutez une marge inférieure pour espacer les conversations */
+        .conversation {
+            margin-bottom: 30px;
+        }
+
+        /* Styles for the app interfaces */
+        .app-interface {
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar {
+            padding: 10px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* Couleur mauve pour Viber */
+        #interface-2 {
+            background-color: #8e44ad;
+        }
+
+        /* Couleur verte pour WhatsApp */
+        #interface-4 {
+            background-color: #2ecc71;
+        }
+        #interface-1 {
+            background-color: #3763dd;
+        }
+
+        /* Style for the counter */
+        #counter {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            color: white;
+            font-size: 24px;
+        }
+        #interface-noire {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding-top: 50vh;
+            font-size: 24px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="phone">
+        <div id="apps">
+            <div class="app" onclick="afficherInterface('interface-1')">
+                <img src="Messenger.png" alt="Messenger">
+                <span>Messenger</span>
+            </div>
+            <div class="app" onclick="afficherInterface('interface-2')">
+                <img src="Viber.png" alt="Viber">
+                <span>Viber</span>
+            </div>
+            <div class="app" onclick="afficherInterface('interface-3')">
+                <img src="Note.png" alt="Note">
+                <span>Note</span>
+            </div>
+            <div class="app" onclick="afficherInterface('interface-4')">
+                <img src="whatsupp.webp" alt="whatsapp">
+                <span>Whatsapp</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interfaces for each app -->
+    <!-- Interface for Messenger -->
+    <div id="interface-1" class="app-interface">
+        <div class="navbar" style="color: white;">
+            Messenger
+        </div>
+        <div id="person-interface" class="app-interface" style="display: none;">
+            <div class="navbar">
+                <span id="person-name">Personne</span>
+            </div>
+            <div class="close-button" onclick="fermerInterface('person-interface')">X</div>
+            <h4>Chat with <span id="person-chat-name">Personne</span></h4>
+            <!-- Ajout du contenu spécifique à la personne -->
+            <div id="person-chatbox" class="person-chatbox"></div>
+        </div>
+    
+        <div class="close-button" onclick="fermerInterface('interface-1')">X</div>
+        <h2>Menu</h2>
+       <h4> <div id="Les-Amis">
+            <!-- Conversation avec Personne 1 -->
+            <div class="conversation" onclick="ouvrirDiscussion('person-1')">
+                <div class="user-info">
+                    
+                    <span class="name" id="person-1">Imad Ganoun</span>
+                </div>
+            </div>
+            <!-- Conversation avec Personne 2 -->
+            <div class="conversation" onclick="ouvrirDiscussion('person-2')">
+                <div class="user-info">
+                    
+                    <span class="name" id="person-2">Nadir Pitchou</span>
+                </div>
+            </div>
+            <!-- Ajoutez d'autres conversations ici -->
+            <div class="conversation" onclick="ouvrirDiscussion('person-3')">
+                <div class="user-info">
+                    
+                    <span class="name" id="person-3">Adlene Sakmech</span>
+                </div>
+            </div>
+            
+            <!-- Ajoutez d'autres conversations ici -->
+            <div class="conversation" onclick="ouvrirDiscussion('person-4')">
+                <div class="user-info">
+                    
+                    <span class="name" id="person-4">Marwa copine</span>
+                </div>
+            </div>
+            <div class="conversation" onclick="ouvrirDiscussion('person-5')">
+                <div class="user-info">
+                    
+                    <span class="name" id="person-5">Khalil berradi</span>
+                </div>
+            </div>
+            <div class="conversation" onclick="ouvrirDiscussion('person-6')">
+                <div class="user-info">
+                    
+                    <span class="name" id="person-6">Mahii mn</span>
+                </div>
+            </div>
+        </h4>
+
+        </div>
+    </div>
+
+    <!-- Interface for Viber with mauve color -->
+    <div id="interface-2" class="app-interface">
+        <div class="navbar" style="background-color: #8e44ad; color: white;">
+            Viber
+        </div>
+        <div class="close-button" onclick="fermerInterface('interface-2')">X</div>
+        <h2>Conversasion avec Zaki gettat</h2>
+        <div id="viber-amis">
+            <!-- Liste des amis Viber -->
+            
+         <h4>   <p>Ancienne conversation : </p>
+            <p> Date : 03/03/2023</p>
+            <p> Zaki: "Yacine tl3ab ghadwa partiya?"</p>
+            <p> Yacine: "Oui nchlh 7:30"</p>
+            <p> Date : 13/03/2023</p>
+            <p> Yacine: "zaki thalali fi rohk ghdi ntwhchk sahbi"</p>
+            
+            
+        </h4>
+        </div>
+    </div>
+    
+    <!-- Interface for Notes with yellow color -->
+<div id="interface-3" class="app-interface" style="background-color: #f1c40f; color: rgb(0, 0, 0);">
+    <div class="navbar">
+        Notes
+    </div>
+    <div class="close-button" onclick="fermerInterface('interface-3')">X</div>
+    <h2>Menu</h2>
+    <div id="notes-chatbox">
+        <!-- Contenu de la conversation pour les notes -->
+        <h3>Vos notes sont ici.</h3>
+        <p>"Rendez-vous avec Mahii Mn à 18h, au parc. Pour le telephone."
+            Date : 10/03/2023</p>
+        <p>"Rendez-vous avec Marwa à 20h, Ghadi nkemel m3aha lyoum w sayi"
+                Date : 10/03/2023</p>
+                <p>"Rendez-vous avec Khalil à 15h, Kan mes7a9ni nchoufou chakhash hedek brohah y3ayi"
+                    Date : 10/03/2023</p>
+
+    </div>
+</div>
+
+
+    <!-- Interface for WhatsApp with green color -->
+    <div id="interface-4" class="app-interface">
+        <div class="navbar" style="background-color: #2ecc71; color: white;">
+            WhatsApp
+        </div>
+        <div class="close-button" onclick="fermerInterface('interface-4')">X</div>
+        <h2>Conversasion avec Abderahman bng</h2>
+        <div id="whatsapp-chatbox">
+            <h4>   <p>Ancienne conversation : </p>
+                <p> Date : 03/03/2023</p>
+                <p> bng : we mrkch ga3 tji l stade </p>
+                <p> Yacine: Ki nbghi nji nglk sahbi</p>
+                <p> Date : 13/03/2023</p>
+                <p> Yacine: abderahman merci pour tout Lsahbi</p>
+                <p> bng : mlk 3lh ena chdrtlk?</p>
+                
+                
+            </h4>
+            <!-- Contenu de la conversation WhatsApp -->
+        </div>
+    </div>
+    
+
+    <!-- Nouvelle interface pour la discussion avec une personne -->
+    <div id="person-interface" class="app-interface" style="display: none;">
+        <div class="navbar">
+            <span id="person-name">Personne</span>
+        </div>
+        <div class="close-button" onclick="fermerInterface('person-interface')">X</div>
+        <h4>Chat with <span id="person-chat-name">Personne</span></h4>
+        <div id="person-chatbox">
+            
+            </div>
+        
+    </div>
+
+    <!-- Counter element -->
+    <h1 id="counter" style="position: fixed; top: 11px; right: 493px; color: rgb(255, 255, 255); font-size: 24px;">100%</h1>
+
+    <script>
+        var counterElement = document.getElementById('counter');
+        var counterValue = 100;
+
+        function updateCounter() {
+            counterValue -= 1;
+            if (counterValue < 0) {
+                counterValue = 0;
+            }
+            counterElement.innerText = counterValue + '%';
+        }
+
+        // Initial call to start the counter
+        updateCounter();
+
+        // Update the counter every 30 seconds
+        setInterval(updateCounter, 4000);
+
+        function afficherInterface(interfaceId) {
+            var interfaceToShow = document.getElementById(interfaceId);
+            if (interfaceToShow) {
+                interfaceToShow.style.display = 'block';
+            }
+        }
+        
+
+        function fermerInterface(interfaceId) {
+            var interfaceToClose = document.getElementById(interfaceId);
+            if (interfaceToClose) {
+                interfaceToClose.style.display = 'none';
+            }
+        }
+
+        function ouvrirDiscussion(personId) {
+            // Obtenez le nom de la personne
+            var personName = document.getElementById(personId).innerText;
+
+            // Afficher la nouvelle interface pour la discussion avec la personne
+            var personInterface = document.getElementById('person-interface');
+            if (personInterface) {
+                // Mettez à jour le nom de la personne dans la nouvelle interface
+                document.getElementById('person-name').innerText = personName;
+                document.getElementById('person-chat-name').innerText = personName;
+
+                // Affichez la nouvelle interface
+                personInterface.style.display = 'block';
+            }
+        }
+    </script>
+    <div id="interface-noire">
+        <p> Téléphone décharger partie perdu.</p>
+    </div>
+    <script>
+        // Fonction pour ouvrir la discussion avec une personne
+        function ouvrirDiscussion(personId) {
+            // Obtenez le nom de la personne
+            var personName = document.getElementById(personId).innerText;
+
+            // Afficher la nouvelle interface pour la discussion avec la personne
+            var personInterface = document.getElementById('person-interface');
+            if (personInterface) {
+                // Mettez à jour le nom de la personne dans la nouvelle interface
+                document.getElementById('person-name').innerText = personName;
+                document.getElementById('person-chat-name').innerText = personName;
+
+                // Affichez la nouvelle interface
+                personInterface.style.display = 'block';
+
+                // Effacez le contenu précédent du chatbox
+                document.getElementById('person-chatbox').innerHTML = "";
+            }
+        }
+
+        // Fonction pour envoyer un message
+        function envoyerMessage() {
+            var messageInput = document.getElementById('message-input');
+            var message = messageInput.value;
+
+            // Ajoutez le message au chatbox
+            var chatbox = document.getElementById('person-chatbox');
+            chatbox.innerHTML += "<p>" + message + "</p>";
+
+            // Effacez le champ de saisie
+            messageInput.value = "";
+        }
+    </script>
+    <script>
+        // Fonction pour ouvrir la discussion avec une personne
+        function ouvrirDiscussion(personId) {
+            // Obtenez le nom de la personne
+            var personName = document.getElementById(personId).innerText;
+    
+            // Afficher la nouvelle interface pour la discussion avec la personne
+            var personInterface = document.getElementById('person-interface');
+            if (personInterface) {
+                // Mettez à jour le nom de la personne dans la nouvelle interface
+                document.getElementById('person-name').innerText = personName;
+                document.getElementById('person-chat-name').innerText = personName;
+    
+                // Affichez la nouvelle interface
+                personInterface.style.display = 'block';
+    
+                // Remplacez le contenu du chatbox par celui spécifique à la personne
+                var chatboxContent = getChatboxContentForPerson(personId);
+                document.getElementById('person-chatbox').innerHTML = chatboxContent;
+            }
+        }
+    
+        // Fonction pour obtenir le contenu spécifique à la personne (à personnaliser selon vos besoins)
+        function getChatboxContentForPerson(personId) {
+    switch (personId) {
+        case 'person-1':
+            return  `
+            <p>Date : 09/03/2023</p>
+                <p>Imad: We Yacine, tt va bien?</p>
+                <p>Yacine: Oui normal. Nla9ouha hachiya?</p>
+                <p>Date : 10/03/2023</p>
+                <p>Yacine: Imad smahli la khasart m3ak bshK nla9ouha fi blassa khir nchlh</p>
+                <p>Imad: Charak tgoul Yacine?</p>
+                <p>Imad: "Ha hdr mlk brohk rak ghalt f ketba"</p>
+                
+                
+            `;
+        
+        case 'person-2':
+        return  `
+        Ancienne conversation :
+        <p>Date : 09/03/2023</p>
+                <p>Nadir: "Yacine, ça fait longtemps. Tout va bien?"</p>
+                <p>Yacine: "Oui, tout va bien. Besoin de te parler plus tard."</p>
+                <p>Date : 10/03/2023</p>
+                <p>Yacine: nadir nta les homme wH jamais khsrt maaya bsh khdi nwed3ak hed khtra a dieu</p>
+                <p>Nadir: "Yacine mafhamtekch wlh"</p>
+                
+                
+                
+            `;
+            case 'person-3':
+        return  `
+        Ancienne conversation :
+        <p>Date : 05/03/2023</p>
+                <p>Yacine: "Adlene rwah nryhou chwiya f carti"</p>
+                <p>Adlene: "Saha"</p>
+                <p>Date : 10/03/2023</p>
+                <p>Yacine: adlne nta khouya w hbibi ntAla9ou fi sa3a ta3 khir nchlh</p>
+                <p>Nadir: Hhhhhhhhhhhhh saha</p>
+                
+                
+                
+            `;
+            case 'person-4':
+            return  `
+        Ancienne conversation :
+        <p>Date : 09/03/2023</p>
+                <p>Marwa: "Yacine chkoun hedik li kount m3aha? "</p>
+                <p>Yacine: "Appel a duré 20 minutes"</p>
+                <p>Date : 10/03/2023</p>
+                <p>Yacine: smhili majitchL lyoum bghit nglk je t'aime et au revoire</p>
+                <p>Marwa : yacine mlk charak tgoul rwah nhdrou maelich li majitch lyoum</p>
+                <p>Marwa : yacine !!!!</p>
+                
+                
+                
+            `;
+        // Ajoutez des cas pour d'autres personnes
+        case 'person-5':
+            return  `
+        Ancienne conversation :
+        
+                <p>Khalil : yacine rani mes7a9ak smana jaya urgent lazm ntla9ou ki nji"</p>
+                <p>Yacine: "Saha"</p>
+                <p>Date : 10/03/2023</p>
+                <p>Yacine: khalil sahbi bghit nglk a dieu ghdi netwahchk hbibi</p>
+                
+                
+                
+                
+            `;
+            case 'person-6':
+            return  `
+        Ancienne conversation :
+                <p>Date : 04/03/2023</p>
+                <p>Mahii mn : yacine tel sabtlk sayi smana jaya le 10 rwah recupirih"</p>
+                <p>Yacine: "Saha nchlh sahbi hfdk"</p>
+                <p>Date : 10/03/2023</p>
+                <p>Yacine: Mahyou nIta sahbi w hbibi w gae cha kyn w smhli li majitch</p>
+                <p>Mahii mn: Mlk yacine 3lh majitch chkyn mkn wlou?</p>
+                
+                
+                
+            `;
+        default:
+            return "<p>Contenu par défaut.</p>";
+    }
+}
+
+    </script>
+    <script>
+        // Désactive l'événement de rafraîchissement de la page
+        window.addEventListener('beforeunload', function (e) {
+            // Annule l'événement de rafraîchissement
+            e.preventDefault();
+            // Message facultatif à afficher
+            e.returnValue = '';
+        });
+    </script>
+    
+    <script>
+
+        var counterElement = document.getElementById('counter');
+        var counterValue = 100;
+
+        function updateCounter() {
+            counterValue -= 1;
+            if (counterValue < 0) {
+                counterValue = 0;
+
+                // Affichez l'interface noire lorsque le compteur atteint 0%
+                var interfaceNoire = document.getElementById('interface-noire');
+                if (interfaceNoire) {
+                    interfaceNoire.style.display = 'block';
+                }
+            }
+            counterElement.innerText = counterValue + '%';
+        }
+
+        // Initial call to start the counter
+        updateCounter();
+
+        // Update the counter every 4 seconds for testing (replace with 30 seconds in your final version)
+        setInterval(updateCounter, 100000);
+
+        // Votre code JavaScript actuel reste inchangé
+    </script>
+</body>
+</html>
